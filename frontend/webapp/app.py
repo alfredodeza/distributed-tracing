@@ -50,9 +50,6 @@ def root():
 
 @app.route("/sentiment", methods=["POST"])
 def sentiment():
-    with tracer.start_span('sentiment') as span:
-        span.log_kv({'event': 'POST', 'route': '/sentiment'})
-        span.set_tag("sentiment", "POST")
     endpoint = os.path.join(backend, "predict")
     response = requests.post(endpoint, json=request.json)
     try:
